@@ -1,0 +1,45 @@
+---
+layout: layouts/base.njk
+---
+<!-- Back Navigation -->
+<div class="back-nav">
+  <a href="/" class="back-link">$ cd ..</a>
+</div>
+
+<!-- Main Article Column -->
+<article>
+  <!-- Title -->
+  <h1>{{ title }}</h1>
+
+  <!-- Integrated Metadata -->
+  <div class="article-meta">
+    <span class="article-category">[{{ category }}]</span>
+    <span>//</span>
+    <span>{{ date | postDate }}</span>
+    <span>//</span>
+    <span>{{ content | readingTime }}</span>
+  </div>
+
+  {% if series %}
+    <!-- Series Navigation Widget (Variant 1: tree Motif - Borderless) -->
+    <div class="series-nav-box">
+      <div style="font-weight: bold; color: var(--color-accent); margin-bottom: var(--spacing-xs); font-size: 12px; letter-spacing: 0.02em;">
+        <span style="color: var(--color-border); font-weight: normal;">$</span> tree series/{{ series | slugify }}/
+      </div>
+      <div>series/{{ series | slugify }}/</div>
+      <div style="white-space: pre;">
+{%- for item in collections.series[series] -%}
+{%- if loop.last %}└── {% else %}├── {% endif -%}
+{%- if item.url == page.url -%}
+<span style="font-weight: bold; color: var(--color-accent);">[part-{{ item.data.seriesPart }}]</span> <span class="series-active-title">{{ item.url | catFileName }}</span> <span style="color: var(--color-accent); font-weight: 600;">&lt;active&gt;</span>
+{%- else -%}
+<span style="font-weight: bold; color: var(--color-fg-muted);">[part-{{ item.data.seriesPart }}]</span> <a href="{{ item.url }}" class="series-link">{{ item.url | catFileName }}</a>
+{%- endif %}
+{%- if not loop.last %}
+{% endif -%}
+{%- endfor %}</div>
+    </div>
+  {% endif %}
+
+  {{ content | safe }}
+</article>

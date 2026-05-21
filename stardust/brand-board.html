@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Brand Board — vdua</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lichen: #CAD2C5;
+    --sage: #84A98C;
+    --moss: #52796F;
+    --canopy: #354F52;
+    --loam: #2F3E46;
+    --page-bg: #CAD2C5;
+    --text: #2F3E46;
+    --text-mute: #354F52;
+    --section-bg: rgba(255,255,255,0.45);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--page-bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* Sticky nav */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--canopy);
+    padding: 12px 32px;
+    display: flex; gap: 24px; align-items: center;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    overflow-x: auto;
+  }
+  nav a { color: var(--lichen); text-decoration: none; white-space: nowrap; font-weight: 500; }
+  nav a:hover { color: #fff; }
+
+  /* Sections */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+  section {
+    padding: 48px 0;
+    border-bottom: 1px solid rgba(53,79,82,0.15);
+  }
+  section:last-child { border-bottom: none; }
+  .section-title {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--moss); font-weight: 600; margin-bottom: 24px;
+  }
+
+  /* Masthead */
+  .masthead {
+    padding: 72px 0 48px;
+    text-align: center;
+    border-bottom: 1px solid rgba(53,79,82,0.15);
+  }
+  .masthead img { height: 40px; margin-bottom: 16px; }
+  .masthead h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px; font-weight: 700; letter-spacing: -0.03em;
+    color: var(--canopy); margin-bottom: 8px;
+  }
+  .masthead .tagline {
+    font-family: 'Lora', serif;
+    font-size: 18px; font-style: italic; color: var(--moss);
+    max-width: 480px; margin: 0 auto 16px;
+  }
+  .masthead .philosophy {
+    font-size: 14px; color: var(--text-mute); max-width: 560px; margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Color palette */
+  .palette-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  }
+  .swatch {
+    aspect-ratio: 1; border-radius: 6px; padding: 12px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+  .swatch .s-name { font-weight: 600; font-size: 13px; margin-bottom: 2px; font-family: 'Inter', sans-serif; }
+  .swatch .s-role { opacity: 0.7; margin-bottom: 2px; }
+  .swatch .s-use { opacity: 0.6; font-size: 10px; line-height: 1.4; margin-top: 4px; }
+
+  /* Typography */
+  .type-specimen {
+    background: var(--section-bg);
+    border-radius: 6px; padding: 28px 32px; margin-bottom: 16px;
+  }
+  .type-specimen .label {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--moss); font-weight: 600; margin-bottom: 12px;
+  }
+  .type-specimen .demo { color: var(--canopy); }
+  .type-specimen .meta {
+    font-size: 12px; color: var(--text-mute); margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .type-rules {
+    background: var(--section-bg); border-radius: 6px;
+    padding: 20px 24px; margin-top: 16px;
+  }
+  .type-rules li { margin-bottom: 6px; font-size: 13px; color: var(--text-mute); }
+
+  /* Voice */
+  .voice-character {
+    font-family: 'Lora', serif; font-size: 18px; line-height: 1.7;
+    color: var(--canopy); margin-bottom: 24px; max-width: 600px;
+  }
+  .trait-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .trait-tags .tag {
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+  }
+  .trait-tags .tag.positive { background: var(--moss); color: var(--lichen); }
+  .trait-tags .tag.negative { background: var(--loam); color: var(--sage); }
+  .do-dont-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;
+  }
+  .do-dont-card {
+    background: var(--section-bg); border-radius: 6px; padding: 20px 24px;
+  }
+  .do-dont-card .dd-label {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 12px;
+  }
+  .do-dont-card.do .dd-label { color: var(--moss); }
+  .do-dont-card.dont .dd-label { color: var(--canopy); }
+  .do-dont-card blockquote {
+    font-family: 'Lora', serif; font-style: italic;
+    font-size: 14px; line-height: 1.6; margin: 0 0 8px; padding: 0;
+    color: var(--canopy);
+  }
+  .do-dont-card .context {
+    font-size: 12px; color: var(--text-mute); margin-bottom: 16px;
+  }
+
+  /* Voice rules */
+  .voice-rules {
+    background: var(--section-bg); border-radius: 6px;
+    padding: 20px 24px; margin-top: 20px;
+  }
+  .voice-rules h4 {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--moss); font-weight: 600; margin-bottom: 12px;
+  }
+  .voice-rules li { font-size: 13px; margin-bottom: 6px; color: var(--text-mute); }
+
+  /* Tone */
+  .goal-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .goal-card {
+    background: var(--section-bg); border-radius: 6px; padding: 20px 24px;
+  }
+  .goal-card h4 {
+    font-size: 14px; font-weight: 600; color: var(--canopy); margin-bottom: 8px;
+  }
+  .goal-card p { font-size: 13px; color: var(--text-mute); line-height: 1.6; }
+
+  /* Motifs */
+  .motif-card {
+    background: var(--section-bg); border-radius: 6px; padding: 24px;
+    margin-bottom: 12px;
+  }
+  .motif-card h4 { font-weight: 600; color: var(--canopy); margin-bottom: 8px; }
+  .motif-card p { font-size: 13px; color: var(--text-mute); line-height: 1.6; }
+  .motif-demo { margin-top: 16px; }
+  .understory-line { height: 1px; background: var(--sage); opacity: 0.3; }
+  .leaf-mark { text-align: center; font-size: 18px; color: var(--sage); letter-spacing: 0.3em; }
+
+  /* Components */
+  .btn-row { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; }
+  .btn {
+    display: inline-block; border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 14px;
+    border-radius: 6px; padding: 10px 20px; font-weight: 500;
+  }
+  .btn-moss { background: var(--moss); color: #F5F7F4; }
+  .btn-sage { background: transparent; color: var(--moss); border: 1.5px solid var(--sage); }
+
+  /* Content pillars */
+  .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .pillar-card {
+    background: var(--section-bg); border-radius: 6px; padding: 24px;
+    border-top: 3px solid var(--moss);
+  }
+  .pillar-card h4 { font-weight: 600; color: var(--canopy); margin-bottom: 8px; }
+  .pillar-card p { font-size: 13px; color: var(--text-mute); line-height: 1.6; }
+
+  /* Persona */
+  .persona-card {
+    background: var(--section-bg); border-radius: 6px; padding: 28px 32px;
+    max-width: 480px;
+  }
+  .persona-card h4 { font-weight: 600; color: var(--canopy); margin-bottom: 4px; }
+  .persona-card .desc { font-size: 14px; color: var(--text-mute); margin-bottom: 12px; line-height: 1.6; }
+  .persona-card .motto {
+    font-family: 'Lora', serif; font-style: italic; font-size: 15px;
+    color: var(--moss); margin-top: 12px;
+  }
+
+  /* Logo */
+  .logo-section { display: flex; gap: 32px; align-items: flex-start; }
+  .logo-box {
+    background: var(--section-bg); border-radius: 6px; padding: 32px 48px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-box.dark { background: var(--loam); }
+  .logo-box img { height: 36px; }
+
+  /* Spacing */
+  .spacing-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 24px; }
+  .spacing-block {
+    background: var(--moss); border-radius: 3px; opacity: 0.6;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #fff; font-family: 'JetBrains Mono', monospace;
+  }
+  .radius-row { display: flex; gap: 16px; }
+  .radius-sample {
+    width: 64px; height: 64px; background: var(--moss); opacity: 0.4;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #fff; font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Photography */
+  .photo-rules li { margin-bottom: 8px; font-size: 13px; color: var(--text-mute); line-height: 1.5; }
+  .photo-donts li { color: var(--canopy); }
+
+  @media (max-width: 768px) {
+    .palette-grid { grid-template-columns: repeat(3, 1fr); }
+    .do-dont-grid, .goal-cards, .pillar-grid { grid-template-columns: 1fr; }
+    .logo-section { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#masthead">Brand</a>
+  <a href="#colors">Colors</a>
+  <a href="#typography">Typography</a>
+  <a href="#voice">Voice</a>
+  <a href="#tone">Tone</a>
+  <a href="#motifs">Motifs</a>
+  <a href="#components">Components</a>
+  <a href="#pillars">Pillars</a>
+  <a href="#persona">Persona</a>
+  <a href="#logo">Logo</a>
+  <a href="#spacing">Spacing</a>
+</nav>
+
+<div class="container">
+
+  <!-- 1. Masthead -->
+  <div class="masthead" id="masthead">
+    <img src="assets/logo.svg" alt="vdua">
+    <h1>vdua</h1>
+    <p class="tagline">Building things, learning things, writing about it.</p>
+    <p class="philosophy">A personal tech blog — notes on AI, AEM Forms, and system design, written for fellow engineers who want depth without pretension.</p>
+  </div>
+
+  <!-- 2. Color Palette -->
+  <section id="colors">
+    <div class="section-title">Color Palette — Earthy Green</div>
+    <div class="palette-grid">
+      <div class="swatch" style="background:#CAD2C5;color:#2F3E46">
+        <div class="s-name">Lichen</div>
+        <div class="s-role">#CAD2C5</div>
+        <div class="s-use">Page background, card surfaces, soft fills</div>
+      </div>
+      <div class="swatch" style="background:#84A98C;color:#2F3E46">
+        <div class="s-name">Sage</div>
+        <div class="s-role">#84A98C</div>
+        <div class="s-use">Tag pills, secondary CTAs, hover states, borders</div>
+      </div>
+      <div class="swatch" style="background:#52796F;color:#F5F7F4">
+        <div class="s-name">Moss</div>
+        <div class="s-role">#52796F</div>
+        <div class="s-use">Links, primary CTA fill, anchor color</div>
+      </div>
+      <div class="swatch" style="background:#354F52;color:#F5F7F4">
+        <div class="s-name">Canopy</div>
+        <div class="s-role">#354F52</div>
+        <div class="s-use">Headings, emphasis text, nav background</div>
+      </div>
+      <div class="swatch" style="background:#2F3E46;color:#CAD2C5">
+        <div class="s-name">Loam</div>
+        <div class="s-role">#2F3E46</div>
+        <div class="s-use">Body text, dark surfaces, footer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Typography -->
+  <section id="typography">
+    <div class="section-title">Typography</div>
+
+    <div class="type-specimen">
+      <div class="label">Headings — Inter</div>
+      <div class="demo" style="font-family:'Inter',sans-serif;font-size:32px;font-weight:700;letter-spacing:-0.02em;line-height:1.2">Understanding Transformer Architectures</div>
+      <div class="meta">Inter · 700 · -0.02em tracking · 1.2 line-height</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label">Body — Lora</div>
+      <div class="demo" style="font-family:'Lora',serif;font-size:17px;line-height:1.7;max-width:65ch">Here's what I learned building this, and where I got stuck. The architecture looks simple on paper. In practice, three things broke. I'm not sure this is the right approach, but here's my reasoning.</div>
+      <div class="meta">Lora · 400 · 1.7 line-height · 65ch max width</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label">Body Emphasis — Lora Italic</div>
+      <div class="demo" style="font-family:'Lora',serif;font-size:17px;font-style:italic;line-height:1.7;color:var(--moss)">One italic accent per paragraph maximum.</div>
+      <div class="meta">Lora · Italic · Used for emphasis, pull quotes</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label">Code — JetBrains Mono</div>
+      <div class="demo" style="font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;background:var(--loam);color:var(--lichen);padding:16px 20px;border-radius:6px;margin-top:8px"><span style="color:#84A98C">const</span> blog = <span style="color:#84A98C">await</span> fetchArticles();<br><span style="color:#84A98C">return</span> blog.<span style="color:#CAD2C5">filter</span>(a => a.tags.<span style="color:#CAD2C5">includes</span>(<span style="color:#E3D081">'ai'</span>));</div>
+      <div class="meta">JetBrains Mono · 400 · 1.6 line-height</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label">Eyebrow / Category — Inter Uppercase</div>
+      <div class="demo" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--moss)">Architecture · May 21, 2026 · 8 min read</div>
+      <div class="meta">Inter · 500 · uppercase · 0.15em tracking</div>
+    </div>
+
+    <div class="type-rules">
+      <ul>
+        <li>Body line length capped at 65ch</li>
+        <li>Heading scale: h1=2rem, h2=1.5rem, h3=1.25rem, h4=1.1rem</li>
+        <li>Line height: body 1.7, headings 1.2</li>
+        <li>Code blocks use JetBrains Mono or Fira Code</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. Voice -->
+  <section id="voice">
+    <div class="section-title">Voice</div>
+    <p class="voice-character">A thoughtful engineer sharing notes from the workbench. Clear, specific, honest about what they know and what they're still figuring out.</p>
+
+    <div class="trait-tags">
+      <span class="tag positive">Clear</span>
+      <span class="tag positive">Specific</span>
+      <span class="tag positive">Honest</span>
+      <span class="tag positive">Curious</span>
+      <span class="tag positive">Grounded</span>
+      <span class="tag negative">Not: Hype-driven</span>
+      <span class="tag negative">Not: Jargon-heavy</span>
+      <span class="tag negative">Not: Condescending</span>
+      <span class="tag negative">Not: Vague</span>
+    </div>
+
+    <div class="do-dont-grid">
+      <div class="do-dont-card do">
+        <div class="dd-label">Do</div>
+        <blockquote>"Here's what I learned building this, and where I got stuck."</blockquote>
+        <div class="context">Opens with vulnerability — builds trust</div>
+        <blockquote>"The architecture looks simple on paper. In practice, three things broke."</blockquote>
+        <div class="context">Contrast between theory and practice — shows real experience</div>
+        <blockquote>"I'm not sure this is the right approach, but here's my reasoning."</blockquote>
+        <div class="context">Intellectual honesty — invites discussion</div>
+      </div>
+      <div class="do-dont-card dont">
+        <div class="dd-label">Don't</div>
+        <blockquote>"This revolutionary AI paradigm will disrupt everything!"</blockquote>
+        <div class="context">Hype without substance</div>
+        <blockquote>"Obviously, you should use microservices here."</blockquote>
+        <div class="context">Condescending assumption</div>
+        <blockquote>"In this blog post, I will discuss..."</blockquote>
+        <div class="context">Academic throat-clearing — just start</div>
+      </div>
+    </div>
+
+    <div class="voice-rules">
+      <h4>Hard Rules</h4>
+      <ul>
+        <li>Write like you're explaining to a smart colleague over coffee</li>
+        <li>Show your work — include code, configs, error messages</li>
+        <li>Admit uncertainty — "I think" and "in my experience" are fine</li>
+        <li>No em dashes — use commas, colons, or periods</li>
+        <li>No exclamation marks in technical prose</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Tone -->
+  <section id="tone">
+    <div class="section-title">Tone Adaptation</div>
+    <div class="goal-cards">
+      <div class="goal-card">
+        <h4>To Teach</h4>
+        <p>Share practical knowledge from real projects. Not theoretical, not tutorial-style, but "here's what I found."</p>
+      </div>
+      <div class="goal-card">
+        <h4>To Document</h4>
+        <p>Create reference material for AEM Forms that others can use when they're stuck.</p>
+      </div>
+      <div class="goal-card">
+        <h4>To Reflect</h4>
+        <p>Architecture retrospectives: what worked, what didn't, what I'd do differently.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Motifs -->
+  <section id="motifs">
+    <div class="section-title">Motifs</div>
+    <div class="motif-card">
+      <h4>Understory Line</h4>
+      <p>A thin 1px horizontal rule in Sage at 30% opacity. Evokes forest floor layering. Used between major content boundaries.</p>
+      <div class="motif-demo">
+        <div class="understory-line"></div>
+      </div>
+    </div>
+    <div class="motif-card">
+      <h4>Leaf Mark</h4>
+      <p>A small typographic ornament in Sage, used as a section break within articles. One per article maximum.</p>
+      <div class="motif-demo">
+        <div class="leaf-mark">❧</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Components -->
+  <section id="components">
+    <div class="section-title">Components</div>
+    <div class="btn-row">
+      <button class="btn btn-moss">Read more</button>
+      <button class="btn btn-sage">View all tags</button>
+    </div>
+    <div style="font-size:13px;color:var(--text-mute)">
+      <p><strong>Moss Fill:</strong> background #52796F, color #F5F7F4, 6px radius, 10px 20px padding</p>
+      <p style="margin-top:4px"><strong>Sage Outline:</strong> transparent bg, color #52796F, 1.5px solid #84A98C border, 6px radius</p>
+      <p style="margin-top:12px"><strong>Border radius:</strong> 6px default. Gentle rounding — not pill-shaped, not sharp.</p>
+      <p style="margin-top:4px"><strong>Max width:</strong> 720px content column</p>
+    </div>
+  </section>
+
+  <!-- 8. Photography -->
+  <section id="photography" style="display:none"><!-- Not applicable for this blog --></section>
+
+  <!-- 9. Content Pillars -->
+  <section id="pillars">
+    <div class="section-title">Content Pillars</div>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <h4>AI</h4>
+        <p>Learnings from working with AI — models, tooling, practical applications. Not hype, not research papers, but engineering notes.</p>
+      </div>
+      <div class="pillar-card">
+        <h4>AEM Forms</h4>
+        <p>Help articles about Adobe Experience Manager Forms — solutions to real problems, configuration guides, best practices.</p>
+      </div>
+      <div class="pillar-card">
+        <h4>Architecture</h4>
+        <p>System design learnings and retrospectives — what decisions were made, why, and how they played out.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Persona -->
+  <section id="persona">
+    <div class="section-title">Persona</div>
+    <div class="persona-card">
+      <h4>The Fellow Engineer</h4>
+      <p class="desc">A mid-to-senior engineer who found this article via a direct link, search, or colleague's recommendation. They want depth, specifics, and honesty.</p>
+      <div class="trait-tags">
+        <span class="tag positive">Practical knowledge</span>
+        <span class="tag positive">Intellectual honesty</span>
+        <span class="tag positive">Code examples</span>
+      </div>
+      <p class="motto">"Show me the code and tell me what broke."</p>
+    </div>
+  </section>
+
+  <!-- 11. Logo -->
+  <section id="logo">
+    <div class="section-title">Logo</div>
+    <div class="logo-section">
+      <div>
+        <div class="logo-box">
+          <img src="assets/logo.svg" alt="vdua logo — light background">
+        </div>
+        <div style="font-size:12px;color:var(--text-mute);margin-top:8px">On Lichen (light)</div>
+      </div>
+      <div>
+        <div class="logo-box dark">
+          <img src="assets/logo.svg" alt="vdua logo — dark background" style="filter:brightness(2.5)">
+        </div>
+        <div style="font-size:12px;color:var(--text-mute);margin-top:8px">On Loam (dark) — inverted</div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:var(--text-mute);margin-top:16px">
+      <p><strong>Source:</strong> Synthesized placeholder. Minimal wordmark in Canopy with Moss accent bar.</p>
+      <p><strong>Clear space:</strong> Minimum 16px around the mark.</p>
+    </div>
+  </section>
+
+  <!-- 12. Spacing -->
+  <section id="spacing">
+    <div class="section-title">Spacing & Shape</div>
+    <div class="spacing-row">
+      <div class="spacing-block" style="width:4px;height:4px" title="XS 4px"></div>
+      <div class="spacing-block" style="width:8px;height:8px" title="S 8px"></div>
+      <div class="spacing-block" style="width:16px;height:16px">M</div>
+      <div class="spacing-block" style="width:24px;height:24px">L</div>
+      <div class="spacing-block" style="width:32px;height:32px">XL</div>
+      <div class="spacing-block" style="width:48px;height:48px">2XL</div>
+      <div class="spacing-block" style="width:64px;height:64px">3XL</div>
+    </div>
+    <div style="font-size:12px;color:var(--text-mute);margin-bottom:24px">XS 4px · S 8px · M 16px · L 24px · XL 32px · 2XL 48px · 3XL 64px</div>
+
+    <div class="radius-row">
+      <div>
+        <div class="radius-sample" style="border-radius:4px">4px</div>
+        <div style="font-size:11px;color:var(--text-mute);margin-top:4px;text-align:center">Subtle</div>
+      </div>
+      <div>
+        <div class="radius-sample" style="border-radius:6px">6px</div>
+        <div style="font-size:11px;color:var(--text-mute);margin-top:4px;text-align:center">Default</div>
+      </div>
+      <div>
+        <div class="radius-sample" style="border-radius:12px">12px</div>
+        <div style="font-size:11px;color:var(--text-mute);margin-top:4px;text-align:center">Rounded</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

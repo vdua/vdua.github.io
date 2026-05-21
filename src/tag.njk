@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+  filter:
+    - all
+    - posts
+    - series
+  addAllPagesToCollections: true
+permalink: /category/{{ tag | slugify }}/
+---
+<!-- Back Navigation -->
+<div class="back-nav">
+  <a href="/" class="back-link">$ cd ..</a>
+</div>
+
+<section>
+  <h2 class="section-title">CATEGORY: {{ tag | upper }}</h2>
+  
+  <div class="post-list">
+    {%- for post in collections[tag] | reverse -%}
+    <div class="post-card">
+      <div class="post-meta">
+        <span class="post-category">[{{ post.data.category }}]</span>
+        <span>•</span>
+        <span>{{ post.date | postDate }}</span>
+        <span>•</span>
+        <span>{{ post.content | readingTime }}</span>
+      </div>
+      <h3><a href="{{ post.url }}" class="post-title-link">{{ post.data.title }}</a></h3>
+      <p class="post-excerpt">{{ post.data.description }}</p>
+      <a href="{{ post.url }}" class="post-action">cat {{ post.url | catFileName }}</a>
+    </div>
+    {%- endfor -%}
+  </div>
+</section>

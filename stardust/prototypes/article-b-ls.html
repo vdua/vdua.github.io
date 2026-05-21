@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  variant_direction: "software-catalog, Inter-forward, clean reading experience"
+  imagery_mode: placeholder
+  post.title: "Handling Dynamic Tables in Adaptive Forms"
+  post.category: "aem-forms"
+  post.date: "2026-05-14"
+  post.read-time: "8 min"
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handling Dynamic Tables in Adaptive Forms // vdua</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --heading-font-family: 'Inter', -apple-system, sans-serif;
+    --body-font-family: 'Inter', -apple-system, sans-serif;
+    --mono-font-family: 'JetBrains Mono', monospace;
+
+    /* Type Scale */
+    --heading-xxl: 32px;
+    --heading-lg: 20px;
+    --body: 15px;
+    --body-sm: 13px;
+
+    --line-height-heading: 1.2;
+    --line-height-body: 1.65;
+
+    /* Earthy Green Palette */
+    --color-bg: #FAFBF9;
+    --color-surface: #CAD2C5; /* Lichen */
+    --color-border: #84A98C; /* Sage */
+    --color-fg: #2F3E46; /* Loam */
+    --color-fg-muted: #52796F; /* Moss */
+    --color-accent: #354F52; /* Canopy */
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 36px;
+    --spacing-2xl: 56px;
+
+    --max-width: 720px;
+    --radius: 4px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--body-font-family);
+    font-size: var(--body);
+    line-height: var(--line-height-body);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: var(--spacing-2xl);
+    border-bottom: 2px solid var(--color-fg);
+    padding-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--mono-font-family);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .logo::before {
+    content: "// ";
+    color: var(--color-border);
+  }
+
+  /* Back Navigation */
+  .back-nav {
+    margin-bottom: var(--spacing-xl);
+    font-family: var(--mono-font-family);
+    font-size: var(--body-sm);
+  }
+
+  .back-link {
+    color: var(--color-fg-muted);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  /* Integrated Metadata Block */
+  .article-meta {
+    font-family: var(--mono-font-family);
+    font-size: 12px;
+    color: var(--color-fg-muted);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .article-category {
+    font-weight: 600;
+  }
+
+  /* Main Prose Content */
+  article {
+    max-width: 65ch; /* Comfortable reading width */
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: var(--heading-font-family);
+    font-size: var(--heading-xxl);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    font-family: var(--heading-font-family);
+    font-size: var(--heading-lg);
+    color: var(--color-accent);
+    margin: var(--spacing-xl) 0 var(--spacing-md);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    border-bottom: 1px solid rgba(132, 169, 140, 0.2);
+    padding-bottom: var(--spacing-xs);
+  }
+
+  article p {
+    margin-bottom: var(--spacing-md);
+    opacity: 0.95;
+  }
+
+  /* Code Blocks */
+  .code-block-wrapper {
+    margin: var(--spacing-lg) 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background-color: #FAFBF9;
+  }
+
+  .code-header {
+    background-color: rgba(202, 210, 197, 0.3);
+    border-bottom: 1px solid var(--color-border);
+    padding: 6px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono-font-family);
+    font-size: 11px;
+    color: var(--color-accent);
+  }
+
+  .btn-copy {
+    background: transparent;
+    border: 1px solid rgba(132, 169, 140, 0.5);
+    color: var(--color-fg-muted);
+    padding: 2px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: var(--mono-font-family);
+    font-size: 10px;
+    transition: all 0.15s ease;
+  }
+
+  .btn-copy:hover {
+    background-color: var(--color-border);
+    color: #fff;
+  }
+
+  pre {
+    padding: var(--spacing-md);
+    overflow-x: auto;
+    font-family: var(--mono-font-family);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-fg);
+  }
+
+  /* Inline Code */
+  code.inline-code {
+    font-family: var(--mono-font-family);
+    font-size: 13px;
+    background-color: rgba(202, 210, 197, 0.3);
+    color: var(--color-accent);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  /* Series Navigation Widget */
+  .series-nav-box {
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: var(--radius);
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin: var(--spacing-lg) 0 var(--spacing-xl);
+    background-color: var(--color-bg);
+  }
+
+  .series-nav-header {
+    font-family: var(--heading-font-family);
+    font-size: var(--body-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: 0.05em;
+  }
+
+  .series-eyebrow {
+    color: var(--color-fg-muted);
+  }
+
+  .series-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .series-nav-item {
+    font-family: var(--mono-font-family);
+    font-size: var(--body-sm);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .series-indicator {
+    color: var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .series-nav-item.is-active .series-indicator {
+    color: var(--color-accent);
+  }
+
+  .series-active-title {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+
+  .series-link {
+    color: var(--color-fg-muted);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .series-link:hover {
+    color: var(--color-accent);
+    border-bottom-style: solid;
+  }
+
+  /* Technical Motifs */
+  .tech-divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: var(--spacing-2xl) 0;
+    position: relative;
+  }
+
+  .tech-divider::after {
+    content: "[ EOF ]";
+    position: absolute;
+    top: -9px;
+    right: 24px;
+    background-color: var(--color-bg);
+    padding: 0 8px;
+    font-family: var(--mono-font-family);
+    font-size: 11px;
+    color: var(--color-border);
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono-font-family);
+    font-size: 11px;
+    color: var(--color-fg-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .footer-links a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline;
+    color: var(--color-accent);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <header>
+    <a href="landing-b.html" class="logo">vdua.github.io</a>
+  </header>
+
+  <!-- Back Navigation -->
+  <div class="back-nav">
+    <a href="landing-b.html" class="back-link">$ cd ..</a>
+  </div>
+
+  <!-- Main Article Column -->
+  <article>
+    <!-- Title -->
+    <h1>Handling Dynamic Tables in Adaptive Forms</h1>
+
+    <!-- Integrated Metadata -->
+    <div class="article-meta">
+      <span class="article-category">[aem-forms]</span>
+      <span>//</span>
+      <span>2026-05-14</span>
+      <span>//</span>
+      <span>08m_read</span>
+    </div>
+
+    <!-- Series Navigation Widget (Variant 2: ls -la Motif) -->
+    <div class="series-nav-box" style="font-family: var(--mono-font-family); font-size: 13px; line-height: 1.5; color: var(--color-fg-muted); padding: var(--spacing-md) var(--spacing-lg); border: 1px solid var(--color-border); border-left: 3px solid var(--color-accent); border-radius: var(--radius); margin: var(--spacing-lg) 0 var(--spacing-xl); background-color: var(--color-bg);">
+      <div style="font-weight: bold; color: var(--color-accent); margin-bottom: var(--spacing-sm); font-size: 12px; letter-spacing: 0.02em;">
+        <span style="color: var(--color-border); font-weight: normal;">$</span> ls -la series/aem-forms-masterclass/
+      </div>
+      <div style="white-space: pre; line-height: 1.6; font-size: 12px; overflow-x: auto;">total 2
+-rw-r--r--  vdua  part-1  <span style="color: var(--color-accent); font-weight: 600;">&lt;active&gt;</span>  <span style="color: var(--color-fg); font-weight: 600;">handling-dynamic-tables.md</span>
+-rw-r--r--  vdua  part-2           <a href="#" style="color: var(--color-fg-muted); text-decoration: none; border-bottom: 1px dashed var(--color-border); transition: color 0.15s ease;" onmouseover="this.style.color='var(--color-accent)'" onmouseout="this.style.color='var(--color-fg-muted)'">prefill-services-setup.md</a></div>
+    </div>
+
+    <p>Adaptive Forms in Adobe Experience Manager (AEM) are exceptionally powerful, but one area that consistently trips up developers is implementing <strong>dynamically repeating rows</strong> inside tables, especially when binding forms to backend XML or JSON schemas.</p>
+
+    <p>Without correct schema-binding and state-management scripting, users will frequently experience partial data loss or reset tables upon draft saving and reloading. In this note, we will walk through the exact scripting rules required to handle table row additions reliably.</p>
+
+    <h2>The Backend Binding Gotcha</h2>
+
+    <p>When you map an adaptive form table to a schema model, AEM expects structural consistency. If your schema dictates a repeating element under <code class="inline-code">/data/items/item</code>, AEM's binding engine automatically handles row replication on initial render. However, manual UI addition triggers must be carefully bound to avoid broken bindings.</p>
+
+    <p>To safely add a row dynamically via a button click, we must instantiate a new instance of the repeating object using the form instance manager.</p>
+
+    <h2>The Scripting Solution</h2>
+
+    <p>Here is the standard JavaScript expression used inside the click handler of your <strong>"Add Row"</strong> button. Make sure to choose JavaScript (not GuideScript) in your AEM Rule Editor:</p>
+
+    <div class="code-block-wrapper">
+      <div class="code-header">
+        <span>add-row-trigger.js</span>
+        <button class="btn-copy" onclick="alert('Copied!')">copy</button>
+      </div>
+      <pre><code>// 1. Locate the parent table row container
+var rowInstance = this.parent.parent.tableRow;
+
+// 2. Fetch the instance manager for the repeatable row element
+var instanceManager = rowInstance.instanceManager;
+
+// 3. Add a new bound instance to the XML/JSON model structure
+if (instanceManager) {
+    // Inserts a new row structure bound to the schema target
+    instanceManager.addInstance(true);
+    
+    // Log for local diagnostics
+    console.log("[AEM Forms] Dynamic row successfully bound and appended.");
+}</code></pre>
+    </div>
+
+    <h2>Ensuring XML Schema Conformity</h2>
+
+    <p>Always ensure your XSD specifies the maximum and minimum occurs correctly. If AEM's minOccurs is set to 1, then the instance manager will automatically initiate one row. When you call <code class="inline-code">addInstance(true)</code>, passing <code class="inline-code">true</code> guarantees AEM will initialize default values matching the XSD's default constraints, preventing empty element validation failures when the user submits the form.</p>
+
+    <p>On our next retrospective, we'll dive into how AEM handles dynamic tables when executing prefill service requests.</p>
+  </article>
+
+  <div class="tech-divider"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div>[system] // © 2026 vdua. all rights reserved.</div>
+    <div class="footer-links">
+      <a href="landing-b.html">home</a>
+      <a href="https://github.com" target="_blank">github</a>
+      <a href="https://linkedin.com" target="_blank">linkedin</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

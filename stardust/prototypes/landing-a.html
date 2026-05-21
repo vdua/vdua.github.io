@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  variant_direction: "editorial, Lora-forward, warm, spacious reading experience"
+  imagery_mode: generated
+  imagery_provider: gemini
+  images: [
+    { section: "hero", path: "images/landing-hero.png", alt: "A minimalist technical abstract motif in sage green and moss tones." }
+  ]
+  latest-posts.item-1.title: synthesized
+  latest-posts.item-2.title: synthesized
+  latest-posts.item-3.title: synthesized
+  about.bio: synthesized
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes from the workbench — vdua</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --heading-font-family: 'Lora', Georgia, serif;
+    --body-font-family: 'Lora', Georgia, serif;
+    --mono-font-family: 'JetBrains Mono', monospace;
+
+    /* Type Scale (Editorial) */
+    --heading-xxl: 44px;
+    --heading-xl: 36px;
+    --heading-lg: 28px;
+    --heading-md: 22px;
+    --body: 18px;
+    --body-sm: 15px;
+
+    --line-height-heading: 1.2;
+    --line-height-body: 1.7;
+
+    /* Earthy Green Palette */
+    --color-bg: #F5F7F4; /* Light off-white with warm/green tint */
+    --color-surface: #CAD2C5; /* Lichen */
+    --color-border: rgba(132, 169, 140, 0.3); /* Sage borders */
+    --color-fg: #2F3E46; /* Loam (dark charcoal) */
+    --color-fg-muted: #52796F; /* Moss */
+    --color-accent: #354F52; /* Canopy */
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 48px;
+    --spacing-2xl: 72px;
+
+    --max-width: 720px;
+    --radius: 6px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--body-font-family);
+    font-size: var(--body);
+    line-height: var(--line-height-body);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: var(--spacing-2xl);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-md);
+  }
+
+  .logo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--color-accent);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  section {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  /* Hero Section */
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-family: var(--heading-font-family);
+    font-size: var(--heading-xxl);
+    line-height: var(--line-height-heading);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-subhead {
+    font-size: var(--body);
+    color: var(--color-fg);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.9;
+  }
+
+  .btn {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: var(--body-sm);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: var(--color-fg-muted);
+    color: #F5F7F4;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-fg-muted);
+    border: 1.5px solid var(--color-surface);
+    margin-left: var(--spacing-sm);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-fg-muted);
+  }
+
+  .hero-image-wrapper {
+    width: 100%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(47, 62, 70, 0.04);
+  }
+
+  .hero-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Motif understory line */
+  .understory-line {
+    height: 1px;
+    background-color: var(--color-surface);
+    opacity: 0.3;
+    margin: var(--spacing-2xl) 0;
+  }
+
+  /* Section Title */
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* Article List */
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .post-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border-bottom: 1px solid rgba(132, 169, 140, 0.15);
+    padding-bottom: var(--spacing-lg);
+  }
+
+  .post-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .post-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--color-fg-muted);
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+
+  .post-category {
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .post-card h3 {
+    font-family: var(--heading-font-family);
+    font-size: var(--heading-md);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+  }
+
+  .post-card h3:hover {
+    color: var(--color-fg-muted);
+  }
+
+  .post-excerpt {
+    font-size: 16px;
+    color: var(--color-fg);
+    opacity: 0.85;
+    line-height: 1.6;
+  }
+
+  /* Tags list */
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .tag-pill {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    padding: 4px 12px;
+    background-color: rgba(132, 169, 140, 0.15);
+    color: var(--color-accent);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .tag-pill:hover {
+    background-color: var(--color-fg-muted);
+    color: #F5F7F4;
+  }
+
+  /* About Card */
+  .about-card {
+    background-color: rgba(255, 255, 255, 0.45);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--spacing-lg);
+  }
+
+  .about-bio {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-links {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .about-link {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--body-sm);
+    color: var(--color-fg-muted);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .about-link:hover {
+    color: var(--color-accent);
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-xl);
+    margin-top: var(--spacing-2xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--color-fg-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .footer-links a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline;
+    color: var(--color-accent);
+  }
+
+  /* Leaf motif symbol */
+  .leaf-mark {
+    text-align: center;
+    font-size: 24px;
+    color: var(--color-surface);
+    opacity: 0.6;
+    margin: var(--spacing-xl) 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <header>
+    <a href="#" class="logo">vdua</a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" data-section="hero" data-intent="emotional hook" data-layout="centered">
+    <div class="hero-content">
+      <h1>Notes from the workbench.</h1>
+      <p class="hero-subhead">A collection of practical learnings on AI engineering, Adobe Experience Manager (AEM) Forms integration, and software system architectures.</p>
+      <a href="#articles" class="btn btn-primary">Browse Articles</a>
+      <a href="#about" class="btn btn-secondary">About Me</a>
+    </div>
+    <div class="hero-image-wrapper">
+      <img src="images/landing-hero.png" alt="A minimalist technical abstract motif in sage green and moss tones.">
+    </div>
+  </section>
+
+  <div class="understory-line"></div>
+
+  <!-- Articles Section -->
+  <section id="articles" data-section="latest-posts" data-intent="content listing" data-layout="list">
+    <h2 class="section-title">Latest Articles</h2>
+    
+    <div class="post-list">
+      <a href="#" class="post-card">
+        <div class="post-meta">
+          <span class="post-category">AEM Forms</span>
+          <span>•</span>
+          <span>May 14, 2026</span>
+          <span>•</span>
+          <span>8 min read</span>
+        </div>
+        <h3>Handling Dynamic Tables in Adaptive Forms</h3>
+        <p class="post-excerpt">A practical guide to implementing XML/JSON schema bindings and dynamic row additions in complex enterprise forms, resolving common state-loss gotchas.</p>
+      </a>
+
+      <a href="#" class="post-card">
+        <div class="post-meta">
+          <span class="post-category">AI</span>
+          <span>•</span>
+          <span>May 1, 2026</span>
+          <span>•</span>
+          <span>6 min read</span>
+        </div>
+        <h3>Evaluating RAG Quality: A Pragmatic Approach</h3>
+        <p class="post-excerpt">How we built an evaluation pipeline for a production document search agent using synthetic queries, cosine similarities, and LLM-as-a-judge patterns.</p>
+      </a>
+
+      <a href="#" class="post-card">
+        <div class="post-meta">
+          <span class="post-category">Architecture</span>
+          <span>•</span>
+          <span>April 18, 2026</span>
+          <span>•</span>
+          <span>10 min read</span>
+        </div>
+        <h3>The Costs of Oversolving: A System Retrospective</h3>
+        <p class="post-excerpt">Reflecting on a system design that over-indexed on hypothetical multi-region scale at the cost of immediate operability, developer velocity, and budget.</p>
+      </a>
+    </div>
+  </section>
+
+  <div class="leaf-mark">❧</div>
+
+  <!-- Tags Section -->
+  <section data-section="tags" data-intent="categorization" data-layout="inline">
+    <h2 class="section-title">Filter by Topic</h2>
+    <div class="tags-container">
+      <a href="#" class="tag-pill">AI</a>
+      <a href="#" class="tag-pill">AEM Forms</a>
+      <a href="#" class="tag-pill">Architecture</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" data-section="about" data-intent="biography" data-layout="card">
+    <h2 class="section-title">About the Author</h2>
+    <div class="about-card">
+      <p class="about-bio">I am a software engineer focused on system architecture, AI enablement, and enterprise forms integration (AEM Forms). This blog is a digital workbench—a place to share raw, honest notes, retrospective reviews, and helpful solutions from actual production engineering without the hype.</p>
+      <div class="about-links">
+        <a href="https://github.com" target="_blank" class="about-link">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" class="about-link">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2026 vdua. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="https://github.com" target="_blank">GitHub</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

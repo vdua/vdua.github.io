@@ -1,0 +1,320 @@
+{
+  "_provenance": {
+    "generated_by": "brand",
+    "date": "2026-05-21",
+    "source": "conversation",
+    "extraction_method": "conversation only",
+    "synthesized_inputs": [
+      "philosophy — composed from user's tagline and stated interests",
+      "voice.examples.do — composed from stated tone (technical but approachable)",
+      "voice.examples.dont — LLM-composed to contrast with stated voice",
+      "photography — synthesized (no visual reference provided)",
+      "personas — composed from stated audience and content pillars",
+      "motifs — synthesized from earthy/natural palette direction",
+      "componentStyle — synthesized defaults for blog register",
+      "spacing — synthesized defaults"
+    ],
+    "screenshots": [],
+    "note": "Personal blog, no existing brand guidelines. Palette from Coolors library pick."
+  },
+
+  "_divergence": {
+    "toolkit_version": "v0.1",
+    "seed": {
+      "decade": null,
+      "craft": null,
+      "register": null,
+      "ground": "monochrome-tint",
+      "picked_by": "designer",
+      "overrides": ["ground"],
+      "hash_input": null
+    },
+    "font_deck": null,
+    "palette_source": {
+      "method": "library-pick",
+      "library_version": "v0.6.0",
+      "library_source": "coolors.co/palettes/trending (scraped 2026-04-24)",
+      "description_used": "earthy calm sage olive stone grounded natural",
+      "classification": {
+        "energy": 2,
+        "contrast": null,
+        "saturation_level": 3,
+        "hue_bias": "green",
+        "ground_family": "monochrome-tint"
+      },
+      "candidates_shown": [
+        { "index": 1, "name": "Earthy Green", "source": "https://coolors.co/cad2c5-84a98c-52796f-354f52-2f3e46", "score": 190 },
+        { "index": 2, "name": "Vintage Cottage Charm", "source": "https://coolors.co/54494b-f1f7ed-91c7b1-b33951-e3d081", "score": 174 },
+        { "index": 3, "name": "Lavender Serenity", "source": "https://coolors.co/f7f4ea-ded9e2-c0b9dd-80a1d4-75c9c8", "score": 150 },
+        { "index": 4, "name": "Pastel Dreams", "source": "https://coolors.co/809bce-95b8d1-b8e0d2-d6eadf-eac4d5", "score": 150 },
+        { "index": 5, "name": "Forest Hues", "source": "https://coolors.co/283d3b-197278-edddd4-c44536-772e25", "score": 144 }
+      ],
+      "recommended_index": 4,
+      "picked_index": 1,
+      "picked_palette_name": "Earthy Green",
+      "picked_palette_source": "https://coolors.co/cad2c5-84a98c-52796f-354f52-2f3e46"
+    },
+    "anti_toolbox_count": 0,
+    "anti_toolbox_hits": [],
+    "divergence_justifications": [],
+    "off_toolbox_moves": [
+      "earthy-sage palette (not a common AI-blog palette)",
+      "serif body on a dev blog (most use sans-serif)"
+    ],
+    "references_used": [
+      {
+        "source": "overreacted.io (Dan Abramov's blog)",
+        "kind": "conversation",
+        "trends_extracted": ["typography-first minimalism", "warm color accents on clean background", "serif body text", "content-first layout"],
+        "trend_tags": {}
+      }
+    ],
+    "divergence_warning": true
+  },
+
+  "name": "vdua",
+  "philosophy": "Building things, learning things, writing about it. A personal tech blog by vdua — notes on AI, AEM Forms, and system design, written for fellow engineers who want depth without pretension.",
+
+  "logo": {
+    "path": "stardust/assets/logo.svg",
+    "format": "svg",
+    "source": "synthesized-placeholder",
+    "variants": [],
+    "clearSpace": "Minimum 16px around the mark",
+    "donts": ["Don't place on busy backgrounds", "Don't stretch or distort"]
+  },
+
+  "colors": {
+    "primary": [
+      {
+        "name": "Lichen",
+        "hex": "#CAD2C5",
+        "role": "Lichen",
+        "use": "page background (light mode), card surfaces, soft fills"
+      },
+      {
+        "name": "Sage",
+        "hex": "#84A98C",
+        "role": "Sage",
+        "use": "tag pills, secondary CTAs, hover states, borders"
+      },
+      {
+        "name": "Moss",
+        "hex": "#52796F",
+        "role": "Moss",
+        "use": "links, primary CTA fill, anchor color, active states"
+      },
+      {
+        "name": "Canopy",
+        "hex": "#354F52",
+        "role": "Canopy",
+        "use": "headings, emphasis text, nav background"
+      },
+      {
+        "name": "Loam",
+        "hex": "#2F3E46",
+        "role": "Loam",
+        "use": "body text, dark surfaces (dark mode background), footer"
+      }
+    ],
+    "secondary": [],
+    "web": [
+      {
+        "name": "Moss Link",
+        "hex": "#52796F",
+        "role": "Moss"
+      },
+      {
+        "name": "Sage Hover",
+        "hex": "#84A98C",
+        "role": "Sage"
+      }
+    ],
+    "gradients": []
+  },
+
+  "componentStyle": {
+    "borderRadius": {
+      "default": "6px",
+      "usage": "Gentle rounding — not pill-shaped, not sharp. Calm and approachable."
+    },
+    "maxWidth": "720px",
+    "pagePadding": "24px",
+    "navbarHeight": "56px",
+    "buttons": {
+      "patterns": [
+        {
+          "name": "Moss Fill",
+          "style": "background: #52796F; color: #F5F7F4; border-radius: 6px; padding: 10px 20px; font-weight: 500",
+          "example": "Read more"
+        },
+        {
+          "name": "Sage Outline",
+          "style": "background: transparent; color: #52796F; border: 1.5px solid #84A98C; border-radius: 6px; padding: 10px 20px; font-weight: 500",
+          "example": "View all tags"
+        }
+      ],
+      "dualCTA": null
+    }
+  },
+
+  "motifs": [
+    {
+      "name": "Understory line",
+      "description": "A thin 1px horizontal rule in Sage (#84A98C) at 30% opacity, used to separate sections. Evokes forest floor layering.",
+      "usage": "Between article sections, before footer. Not between every element — only at major content boundaries."
+    },
+    {
+      "name": "Leaf mark",
+      "description": "A small typographic ornament (§ or ❧) in Sage, used as a section break within articles instead of a horizontal rule.",
+      "usage": "Within long articles to mark topic shifts. One per article maximum."
+    }
+  ],
+
+  "typography": {
+    "heading": {
+      "family": "Inter",
+      "weights": ["Medium", "SemiBold", "Bold"],
+      "lineHeight": 1.2,
+      "letterSpacing": "-0.02em",
+      "usage": "All headings h1–h4. Inter brings clarity and technical precision."
+    },
+    "subheading": {
+      "family": "Inter",
+      "weight": "Medium",
+      "usage": "Article metadata (date, reading time, tags), nav labels"
+    },
+    "body": {
+      "family": "Lora",
+      "weight": "Regular",
+      "opacity": null,
+      "usage": "Article body text. Lora is a serif with good screen rendering — warm, readable, editorial without being stuffy."
+    },
+    "accent": {
+      "family": "Lora",
+      "weight": "Italic",
+      "usage": "Emphasis within prose, pull quotes. One italic accent per paragraph maximum."
+    },
+    "eyebrow": {
+      "family": "Inter",
+      "weight": "Medium",
+      "transform": "uppercase",
+      "usage": "Category labels, tag headers, section eyebrows"
+    },
+    "button": {
+      "family": "Inter",
+      "weight": "Medium",
+      "usage": "CTA buttons, nav links"
+    },
+    "rules": [
+      "Body line length capped at 65ch",
+      "Heading scale: h1=2rem, h2=1.5rem, h3=1.25rem, h4=1.1rem",
+      "Line height: body 1.7, headings 1.2",
+      "Code blocks use JetBrains Mono or Fira Code"
+    ]
+  },
+
+  "photography": {
+    "style": "Not applicable — tech blog uses code blocks, diagrams, and screenshots. No stock photography.",
+    "rules": [
+      "Diagrams should use the brand palette (Sage, Moss, Canopy)",
+      "Screenshots should be clean, focused, well-cropped",
+      "Architecture diagrams use simple box-and-arrow style"
+    ],
+    "donts": [
+      "No stock photography of people at keyboards",
+      "No generic tech imagery (circuit boards, abstract data flows)",
+      "No hero images — let the writing speak"
+    ],
+    "social": "Use Canopy (#354F52) background with white text for OG images"
+  },
+
+  "voice": {
+    "character": "A thoughtful engineer sharing notes from the workbench. Clear, specific, honest about what they know and what they're still figuring out.",
+    "traits": ["Clear", "Specific", "Honest", "Curious", "Grounded"],
+    "antiTraits": ["Hype-driven", "Jargon-heavy", "Condescending", "Vague", "Self-promotional"],
+    "examples": {
+      "do": [
+        { "text": "Here's what I learned building this, and where I got stuck.", "context": "Opens with vulnerability — builds trust" },
+        { "text": "The architecture looks simple on paper. In practice, three things broke.", "context": "Contrast between theory and practice — shows real experience" },
+        { "text": "I'm not sure this is the right approach, but here's my reasoning.", "context": "Intellectual honesty — invites discussion" }
+      ],
+      "dont": [
+        { "text": "This revolutionary AI paradigm will disrupt everything!", "context": "Hype without substance" },
+        { "text": "Obviously, you should use microservices here.", "context": "Condescending assumption" },
+        { "text": "In this blog post, I will discuss...", "context": "Academic throat-clearing — just start" }
+      ]
+    },
+    "rules": [
+      "Write like you're explaining to a smart colleague over coffee",
+      "Show your work — include code, configs, error messages",
+      "Admit uncertainty — 'I think' and 'in my experience' are fine",
+      "No em dashes — use commas, colons, or periods",
+      "No exclamation marks in technical prose"
+    ]
+  },
+
+  "tone": {
+    "description": "Neutral-to-serious for technical content. Slightly warmer for retrospectives and learnings. Never playful, never cold.",
+    "writingGoals": [
+      {
+        "goal": "To teach",
+        "description": "Share practical knowledge from real projects — not theoretical, not tutorial-style, but 'here's what I found'"
+      },
+      {
+        "goal": "To document",
+        "description": "Create reference material for AEM Forms that others can use when they're stuck"
+      },
+      {
+        "goal": "To reflect",
+        "description": "Architecture retrospectives — what worked, what didn't, what I'd do differently"
+      }
+    ],
+    "cleverVsClear": {
+      "clever": "Never. This is a technical blog, not a magazine.",
+      "clear": "Always. Every sentence should be immediately parseable."
+    }
+  },
+
+  "contentPillars": [
+    {
+      "name": "AI",
+      "description": "Learnings from working with AI — models, tooling, practical applications. Not hype, not research papers, but engineering notes."
+    },
+    {
+      "name": "AEM Forms",
+      "description": "Help articles and blog posts about Adobe Experience Manager Forms — solutions to real problems, configuration guides, best practices."
+    },
+    {
+      "name": "Architecture",
+      "description": "System design learnings and retrospectives — what decisions were made, why, and how they played out."
+    }
+  ],
+
+  "personas": [
+    {
+      "name": "The Fellow Engineer",
+      "description": "A mid-to-senior engineer who found this article via a direct link, search, or colleague's recommendation. They want depth, specifics, and honesty.",
+      "values": ["Practical knowledge", "Intellectual honesty", "Code examples"],
+      "motto": "Show me the code and tell me what broke.",
+      "stats": []
+    }
+  ],
+
+  "spacing": {
+    "scale": [
+      { "name": "XS", "value": "4px" },
+      { "name": "S", "value": "8px" },
+      { "name": "M", "value": "16px" },
+      { "name": "L", "value": "24px" },
+      { "name": "XL", "value": "32px" },
+      { "name": "2XL", "value": "48px" },
+      { "name": "3XL", "value": "64px" }
+    ],
+    "borderRadius": [
+      { "name": "Subtle", "value": "4px" },
+      { "name": "Default", "value": "6px" },
+      { "name": "Rounded", "value": "12px" }
+    ]
+  }
+}

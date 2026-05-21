@@ -1,0 +1,90 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.posts
+  size: 3
+  alias: postsList
+  reverse: true
+permalink: "/blog/landing-page/wkb-7f9a/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}"
+---
+
+<!-- Hero Section -->
+<section class="hero-section" data-section="hero" data-intent="emotional hook" data-layout="grid">
+  <div class="hero-content">
+    <h1>Notes from the workbench.</h1>
+    <p class="hero-subhead">A collection of practical learnings on AI engineering, Adobe Experience Manager (AEM) Forms integration, and software system architectures.</p>
+    <div style="display: flex; gap: var(--spacing-sm);">
+      <a href="#articles" class="btn btn-primary">ls articles</a>
+      <a href="#about" class="btn btn-secondary">whoami</a>
+    </div>
+  </div>
+  <div class="hero-image-wrapper">
+    <img src="/images/landing-hero.png" alt="A minimalist technical software abstract layout with directories and commit trees.">
+  </div>
+</section>
+
+<div class="tech-divider"></div>
+
+<!-- Articles Section -->
+<section id="articles" data-section="latest-posts" data-intent="content listing" data-layout="list">
+  <h2 class="section-title">LATEST_POSTS</h2>
+  
+  <div class="post-list">
+    {%- for post in postsList -%}
+    <div class="post-card">
+      <div class="post-meta">
+        <a href="/category/{{ post.data.category | slugify }}/" class="post-category" style="color: inherit; text-decoration: none; border-bottom: 1px dashed var(--color-border);">[{{ post.data.category }}]</a>
+        <span>•</span>
+        <span>{{ post.date | postDate }}</span>
+        <span>•</span>
+        <span>{{ post.content | readingTime }}</span>
+      </div>
+      <h3><a href="{{ post.url }}" class="post-title-link">{{ post.data.title }}</a></h3>
+      <p class="post-excerpt">{{ post.data.description }}</p>
+      <a href="{{ post.url }}" class="post-action">cat {{ post.url | catFileName }}</a>
+    </div>
+    {%- endfor -%}
+  </div>
+
+  <!-- Pagination using More command -->
+  {% if pagination.pages | length > 1 %}
+  <div class="pagination-container">
+    <span class="more-prompt">-- More (Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}) --</span>
+    <span class="pagination-nav">
+      {% if pagination.href.next %}
+        Press <a href="{{ pagination.href.next }}">Space (Next)</a> for next page
+      {% else %}
+        <span>End of directory listing</span>
+      {% endif %}
+      {% if pagination.href.previous %}
+        | <a href="{{ pagination.href.previous }}">B (Previous)</a> to go back
+      {% endif %}
+    </span>
+  </div>
+  {% endif %}
+</section>
+
+<div class="tech-divider"></div>
+
+<!-- Tags Section -->
+<section data-section="tags" data-intent="categorization" data-layout="inline">
+  <h2 class="section-title">TAG_INDEX</h2>
+  <div class="tags-container">
+    <a href="/category/ai/" class="tag-pill">ai</a>
+    <a href="/category/aem-forms/" class="tag-pill">aem-forms</a>
+    <a href="/category/architecture/" class="tag-pill">architecture</a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" data-section="about" data-intent="biography" data-layout="card">
+  <h2 class="section-title">AUTHOR_BIO</h2>
+  <div class="about-card">
+    <p class="about-bio">I am a software engineer focused on system architecture, AI enablement, and enterprise forms integration (AEM Forms). This blog is a digital workbench—a place to share raw, honest notes, retrospective reviews, and helpful solutions from actual production engineering without the hype.</p>
+    <div class="about-links">
+      <a href="https://github.com" target="_blank" class="about-link">github</a>
+      <a href="https://linkedin.com" target="_blank" class="about-link">linkedin</a>
+      <a href="/about/" class="about-link">whoami (extended)</a>
+    </div>
+  </div>
+</section>

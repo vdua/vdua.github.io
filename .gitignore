@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Eleventy static output
+_site/
+
+# Cache directories
+.sass-cache/
+.eleventy.cache/
+
+# Local Environment Variables
+.env
+.env*.local
+
+# OS & Editor configurations
+.DS_Store
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

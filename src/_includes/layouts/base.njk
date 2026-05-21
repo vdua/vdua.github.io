@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "vdua // notes from the workbench" }}</title>
+  <meta name="description" content="{{ description or 'A professional tech blog covering AI engineering, AEM Forms integration, and software system architectures.' }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Syntax highlighting stylesheet -->
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism-okaidia.css" rel="stylesheet">
+  <style>
+    /* Custom Prism overrides to match our design tokens */
+    pre[class*="language-"] {
+      background: transparent;
+      margin: 0;
+      padding: var(--spacing-md);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo">vdua.github.io</a>
+  </header>
+
+  {{ content | safe }}
+
+  <div class="tech-divider"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div>[system] // © 2026 vdua. all rights reserved.</div>
+    <div class="footer-links">
+      <a href="https://github.com" target="_blank">github</a>
+      <a href="https://linkedin.com" target="_blank">linkedin</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("pre[class*='language-']").forEach(pre => {
+      // Create wrapper
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block-wrapper";
+      
+      // Create header
+      const header = document.createElement("div");
+      header.className = "code-header";
+      
+      // Determine language
+      let lang = "code";
+      const classes = pre.className.split(" ");
+      for (const cls of classes) {
+        if (cls.startsWith("language-")) {
+          lang = cls.replace("language-", "");
+          break;
+        }
+      }
+      
+      // Format language name
+      const langMap = {
+        'js': 'javascript',
+        'javascript': 'javascript',
+        'xml': 'xml',
+        'html': 'html',
+        'css': 'css',
+        'java': 'java',
+        'json': 'json',
+        'python': 'python',
+        'py': 'python',
+        'bash': 'bash',
+        'sh': 'shell'
+      };
+      const displayName = langMap[lang.toLowerCase()] || lang;
+      
+      const titleSpan = document.createElement("span");
+      titleSpan.textContent = displayName;
+      
+      const copyBtn = document.createElement("button");
+      copyBtn.className = "btn-copy";
+      copyBtn.textContent = "copy";
+      
+      copyBtn.addEventListener("click", () => {
+        const codeText = pre.querySelector("code")?.textContent || pre.textContent;
+        navigator.clipboard.writeText(codeText).then(() => {
+          copyBtn.textContent = "copied!";
+          setTimeout(() => {
+            copyBtn.textContent = "copy";
+          }, 2000);
+        }).catch(err => {
+          console.error("Failed to copy text: ", err);
+        });
+      });
+      
+      header.appendChild(titleSpan);
+      header.appendChild(copyBtn);
+      
+      // Insert wrapper before pre
+      pre.parentNode.insertBefore(wrapper, pre);
+      
+      // Move pre inside wrapper
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  });
+</script>
+
+</body>
+</html>
