@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="jtVrk9oERXAuTVb840cVmcIet1eTZr3cvPDW57yISfg" />
   <title>{{ title or "vdua // notes from the workbench" }}</title>
   <meta name="description" content="{{ description or 'A professional tech blog covering AI engineering, AEM Forms integration, and software system architectures.' }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,11 +51,11 @@
       // Create wrapper
       const wrapper = document.createElement("div");
       wrapper.className = "code-block-wrapper";
-      
+
       // Create header
       const header = document.createElement("div");
       header.className = "code-header";
-      
+
       // Determine language
       let lang = "code";
       const classes = pre.className.split(" ");
@@ -64,7 +65,7 @@
           break;
         }
       }
-      
+
       // Format language name
       const langMap = {
         'js': 'javascript',
@@ -80,14 +81,14 @@
         'sh': 'shell'
       };
       const displayName = langMap[lang.toLowerCase()] || lang;
-      
+
       const titleSpan = document.createElement("span");
       titleSpan.textContent = displayName;
-      
+
       const copyBtn = document.createElement("button");
       copyBtn.className = "btn-copy";
       copyBtn.textContent = "copy";
-      
+
       copyBtn.addEventListener("click", () => {
         const codeText = pre.querySelector("code")?.textContent || pre.textContent;
         navigator.clipboard.writeText(codeText).then(() => {
@@ -99,13 +100,13 @@
           console.error("Failed to copy text: ", err);
         });
       });
-      
+
       header.appendChild(titleSpan);
       header.appendChild(copyBtn);
-      
+
       // Insert wrapper before pre
       pre.parentNode.insertBefore(wrapper, pre);
-      
+
       // Move pre inside wrapper
       wrapper.appendChild(header);
       wrapper.appendChild(pre);
