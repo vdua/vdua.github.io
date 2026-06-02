@@ -8,12 +8,12 @@ layout: layouts/tutorial.njk
 difficulty: "Intermediate"
 time: "12 mins"
 prereqs: ["AEM Forms local setup", "CRXDE Lite access"]
+hero: "/images/custom-fonts-hero.png"
+displayHero: true
 templateEngineOverride: md
 ---
 
 ## Introduction
-
-![A technical schematic blueprint representing font glyph design vectors and JCR directory trees.](/images/custom-fonts-hero.png)
 
 Adobe Experience Manager (AEM) HTML5 Forms serve dynamic, web-responsive versions of your template documents. However, unlike standard PDF Forms where fonts can be embedded directly within the binary payload, HTML5 Forms assume that the required typography is pre-installed on the client machine.
 

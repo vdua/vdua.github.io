@@ -32,6 +32,12 @@ Size: {{ content | readingTime }}</div>
       </div>
       {% endif %}
 
+      {% if displayHero and hero %}
+      <div class="tutorial-hero">
+        <img src="{{ hero }}" alt="Flowchart showing AEM Custom Fonts structure" />
+      </div>
+      {% endif %}
+
       {{ content | safe }}
     </article>
 

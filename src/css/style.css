@@ -640,6 +640,21 @@ footer {
   min-width: 0; /* Prevent overflow */
 }
 
+.tutorial-hero {
+  display: flex;
+  justify-content: center;
+  margin: var(--spacing-md) 0 var(--spacing-lg) 0;
+}
+
+.tutorial-hero img {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid rgba(132, 169, 140, 0.3);
+  display: block;
+}
+
 /* Sidebar Navigation */
 .tutorial-sidebar {
   display: none;
