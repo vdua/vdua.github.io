@@ -20,21 +20,15 @@ layout: layouts/base.njk
 Size: {{ content | readingTime }}</div>
       </div>
 
-      {% if series %}
-      <!-- Series Navigation Widget (terminal tree Motif) -->
+      {% if prereqs %}
+      <!-- Prerequisites Widget (terminal cat style) -->
       <div class="terminal-block">
-        <span class="terminal-prompt">$</span> tree series/{{ series | slugify }}/
-        <div class="terminal-output">series/{{ series | slugify }}/
-{% for item in collections.series[series] -%}
-{%- if loop.last %}└── {% else %}├── {% endif -%}
-{%- if item.url == page.url -%}
-<span style="font-weight: bold; color: var(--color-accent);">[part-{{ item.data.seriesPart }}]</span> <span class="series-active-title">{{ item.url | catFileName }}</span> <span style="color: var(--color-accent); font-weight: 600;">&lt;active&gt;</span>
-{%- else -%}
-<span style="font-weight: bold; color: var(--color-fg-muted);">[part-{{ item.data.seriesPart }}]</span> <a href="{{ item.url }}" class="series-link">{{ item.url | catFileName }}</a>
-{%- endif %}
-{%- if not loop.last %}
-{% endif -%}
-{%- endfor %}</div>
+        <span class="terminal-prompt">$</span> cat prerequisites.txt
+        <ul class="terminal-bullet-list">
+          {% for prereq in prereqs %}
+          <li>{{ prereq }}</li>
+          {% endfor %}
+        </ul>
       </div>
       {% endif %}
 
@@ -69,8 +63,7 @@ Size: {{ content | readingTime }}</div>
       return;
     }
 
-    headings.forEach((heading, index) => {
-      // Create ID if not exists
+    headings.forEach((heading) => {
       if (!heading.id) {
         heading.id = heading.textContent.toLowerCase()
           .replace(/[^a-z0-9]+/g, "-")
@@ -89,7 +82,6 @@ Size: {{ content | readingTime }}</div>
       tocList.appendChild(li);
     });
 
-    // Add intersection observer to highlight active heading in TOC
     const observerOptions = {
       root: null,
       rootMargin: "0px 0px -60% 0px",
@@ -111,6 +103,6 @@ Size: {{ content | readingTime }}</div>
       });
     }, observerOptions);
 
-    headings.forEach(heading => observer.observe(heading));
+    headings.forEach(h => observer.observe(h));
   });
 </script>

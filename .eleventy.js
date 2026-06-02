@@ -14,6 +14,11 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("yyyy-MM-dd");
   });
 
+  // Unix ls -l style date helper
+  eleventyConfig.addFilter("lsDate", (dateObj) => {
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("MMM dd yyyy");
+  });
+
   // Reading time helper
   eleventyConfig.addFilter("readingTime", (content) => {
     const wordsPerMinute = 200;
