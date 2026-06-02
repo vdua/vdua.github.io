@@ -13,6 +13,8 @@ templateEngineOverride: md
 
 ## Introduction
 
+![A technical schematic blueprint representing font glyph design vectors and JCR directory trees.](/images/custom-fonts-hero.png)
+
 Adobe Experience Manager (AEM) HTML5 Forms serve dynamic, web-responsive versions of your template documents. However, unlike standard PDF Forms where fonts can be embedded directly within the binary payload, HTML5 Forms assume that the required typography is pre-installed on the client machine.
 
 To deliver a consistent brand experience without relying on client-side font availability, modern web fonts (`.woff2` / `.woff`) can be dynamically served through custom rendering profiles and AEM client libraries. 

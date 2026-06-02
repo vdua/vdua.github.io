@@ -411,6 +411,15 @@ article p {
   opacity: 0.95;
 }
 
+article img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid rgba(132, 169, 140, 0.3);
+  margin: var(--spacing-md) 0 var(--spacing-lg) 0;
+  display: block;
+}
+
 article ul,
 article ol {
   padding-left: var(--spacing-lg);
