@@ -6,6 +6,8 @@ module.exports = function(eleventyConfig) {
   // Passthrough copy for CSS and images
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/images");
+  // Passthrough copy for standalone report HTML (self-contained, not processed by Eleventy)
+  eleventyConfig.addPassthroughCopy("src/reports");
 
   // Custom filters
   // Date formatting: yyyy-MM-dd
