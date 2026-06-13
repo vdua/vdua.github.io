@@ -921,3 +921,219 @@ article details ol {
 
 
 
+
+/* ============================================================================
+   REUSABLE DOCUMENT COMPONENTS
+   ----------------------------------------------------------------------------
+   Generic, house-style building blocks for any document/report page (not tied
+   to a specific report shape). Used by the personal-blog-style template and any
+   generated HTML that links this stylesheet. All values derive from the design
+   tokens declared in :root above. Report-specific composites (e.g. the page-
+   audit ".report-card") live in reports/report-widgets.css, not here.
+   ========================================================================== */
+
+/* Semantic status colors (harmonized with the earthy palette).
+   Used by badges, value-emphasis text, callouts, and priority cells. */
+:root {
+  --color-warn: #B7791F; /* Amber — "needs improvement" / caution */
+  --color-bad:  #9B2C2C; /* Brick red — "poor" / critical */
+  --color-ok:   #2F6F4E; /* Deep green — "good" / positive */
+}
+
+/* --- Page sub-header / breadcrumb ----------------------------------------
+   A mono one-liner under the H1 (e.g. metadata, a path crumb). */
+.doc-subhead {
+  font-family: var(--mono-font-family);
+  font-size: var(--body-sm);
+  color: var(--color-fg-muted);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* --- Mini section label --------------------------------------------------
+   A lowercase mono label with a leading "//" for in-card sub-sections.
+   (Complements the existing ".section-title" used for top-level sections.) */
+.mini-title {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-fg-muted);
+  margin-bottom: var(--spacing-xs);
+}
+.mini-title::before {
+  content: "// ";
+  color: var(--color-border);
+}
+
+/* --- Badges --------------------------------------------------------------
+   Compact mono status pills. Base ".badge" + a semantic modifier.
+   Reusable for status, severity, priority, labels, etc.
+   (Distinct from ".tag-pill", which is a filled/interactive taxonomy chip.) */
+.badge {
+  display: inline-block;
+  font-family: var(--mono-font-family);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  color: var(--color-fg-muted);
+  background: rgba(132, 169, 140, 0.08); /* sage tint */
+  white-space: nowrap;
+}
+.badge--bad {
+  color: var(--color-bad);
+  border-color: var(--color-bad);
+  background: rgba(155, 44, 44, 0.06);
+}
+.badge--warn {
+  color: var(--color-warn);
+  border-color: var(--color-warn);
+  background: rgba(183, 121, 31, 0.07);
+}
+.badge--ok {
+  color: var(--color-ok);
+  border-color: var(--color-ok);
+  background: rgba(47, 111, 78, 0.07);
+}
+.badge--notice {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: rgba(53, 79, 82, 0.06);
+}
+
+/* --- Value emphasis ------------------------------------------------------
+   Inline semantic coloring for numbers/values (e.g. flag a poor metric red). */
+.text-ok   { color: var(--color-ok);   font-weight: 600; }
+.text-warn { color: var(--color-warn); font-weight: 600; }
+.text-bad  { color: var(--color-bad);  font-weight: 700; }
+
+/* --- KPI / stat tiles ----------------------------------------------------
+   A responsive grid of summary stat tiles for the top of a document. */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+.kpi {
+  background: #fff;
+  border: 1px solid rgba(132, 169, 140, 0.3);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
+.kpi .kpi-num {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-lg);
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1.1;
+}
+.kpi .kpi-label {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-fg-muted);
+  margin-top: 2px;
+}
+@media (min-width: 720px) {
+  .kpi-strip--4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* --- Callout box ---------------------------------------------------------
+   A bordered note/aside with an accent left rule. Use .callout--warn etc.
+   for semantic emphasis (e.g. data caveats, warnings). */
+.callout {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
+.callout .callout-title {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-xs);
+}
+.callout--warn { border-left-color: var(--color-warn); }
+.callout--warn .callout-title { color: var(--color-warn); }
+.callout--bad  { border-left-color: var(--color-bad); }
+.callout--bad .callout-title  { color: var(--color-bad); }
+
+/* --- Data table ----------------------------------------------------------
+   A clean bordered table for tabular content (recommendations, comparisons).
+   The optional first cell ".cell-key" is a mono, non-wrapping label column. */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.data-table th,
+.data-table td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid rgba(132, 169, 140, 0.2);
+  font-size: var(--body-sm);
+  vertical-align: top;
+  text-align: left;
+}
+.data-table th {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-fg-muted);
+  font-weight: 500;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table .cell-key {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  width: 1%;
+}
+
+/* --- Key/value rows ------------------------------------------------------
+   Compact dashed-separated label/value pairs (e.g. a metric list in a card). */
+.kv-list { display: grid; gap: 2px; }
+.kv-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: 4px 0;
+  border-bottom: 1px dashed rgba(132, 169, 140, 0.3);
+}
+.kv-row .kv-key {
+  font-family: var(--mono-font-family);
+  font-size: 12px;
+  color: var(--color-fg-muted);
+}
+.kv-row .kv-val { font-size: var(--body-sm); text-align: right; }
+.kv-row .kv-val em { font-style: normal; color: var(--color-fg-muted); font-size: 11px; }
+
+/* --- Framed figure -------------------------------------------------------
+   A bordered image/figure (e.g. a screenshot) with optional caption.
+   ".framed--narrow" caps width for tall mobile-shaped images. */
+.framed {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.framed img { display: block; width: 100%; }
+.framed--narrow { max-width: 280px; }
+.framed--narrow img { max-height: 380px; object-fit: contain; }
+.figure-caption {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  margin-top: var(--spacing-xs);
+}

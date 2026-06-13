@@ -1,0 +1,111 @@
+/* ============================================================================
+   REPORT WIDGETS  (report-specific, not house-style)
+   ----------------------------------------------------------------------------
+   Composite components for "page-audit" style reports (top-N pages: traffic +
+   device + screenshot + concerns + severity). These are tied to that report
+   shape, so they live here rather than in the general house style (style.css).
+
+   USAGE: link AFTER the house style, e.g.
+     <link rel="stylesheet" href="https://vdua.github.io/css/style.css">
+     <link rel="stylesheet" href="https://vdua.github.io/reports/report-widgets.css">
+
+   Relies on the design tokens and generic components defined in style.css
+   (--color-*, --spacing-*, .badge, .text-*, .kv-list, .framed, etc.).
+   ========================================================================== */
+
+/* Vertical list of audit cards. */
+.report-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* One audited page. */
+.report-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
+
+/* Card header: rank badge + title/url + severity badge. */
+.report-card .card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+.report-card .rank {
+  font-family: var(--mono-font-family);
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  background: var(--color-accent);
+  border-radius: var(--radius);
+  padding: 2px 8px;
+  flex-shrink: 0;
+}
+.report-card .card-title { flex: 1; }
+.report-card .card-title h3 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-md);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.report-card .card-title .url {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-border);
+  word-break: break-all;
+}
+.report-card .card-title .url:hover {
+  color: var(--color-accent);
+  border-bottom-style: solid;
+}
+
+/* Body: screenshot + stats. Single column by default; two-column on wide
+   screens for portrait/mobile screenshots. */
+.report-card .card-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+@media (min-width: 720px) {
+  .report-card .card-body { grid-template-columns: 280px 1fr; align-items: start; }
+  /* Landscape/desktop screenshots span full width above the stats. */
+  .report-card .card-body.body--wide { grid-template-columns: 1fr; }
+}
+
+/* In-card text sub-sections (observation, concerns). */
+.report-card .card-section { margin-top: var(--spacing-sm); }
+.report-card .card-section p { font-size: var(--body-sm); }
+.report-card ul.concerns { list-style: none; }
+.report-card ul.concerns li {
+  font-size: var(--body-sm);
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: var(--spacing-xs);
+}
+.report-card ul.concerns li::before {
+  content: "\2013"; /* en dash */
+  position: absolute;
+  left: 4px;
+  color: var(--color-border);
+}
+
+/* Optional code-styled detail block (e.g. captured JS error strings). */
+.report-card .error-detail {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  line-height: 1.5;
+  background: rgba(155, 44, 44, 0.04);
+  border: 1px solid rgba(155, 44, 44, 0.25);
+  border-radius: var(--radius);
+  padding: var(--spacing-sm);
+  color: var(--color-fg);
+  overflow-x: auto;
+}
+.report-card .error-detail div { white-space: pre-wrap; word-break: break-word; }
